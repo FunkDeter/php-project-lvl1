@@ -1,15 +1,13 @@
 {
     "name": "hexlet/code",
-    "description": "the best packege on the World",
-    "license": "proprietary",
     "authors": [
         {
             "name": "FunkDeter",
             "email": "igorkinko@gmail.com"
         }
     ],
-    "require": {},
-    "bin": [
-      "bin/brain-games"
-    ]
+    "require": {}
 }
+"bin": [
+  "bin/brain-games"
+]
