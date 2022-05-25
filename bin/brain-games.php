@@ -1,2 +1,3 @@
-php bin/brain-games.php <br>
-Welcome to the Brain Games!
+<?php
+
+echo "Welcome to the Brain Games!";
