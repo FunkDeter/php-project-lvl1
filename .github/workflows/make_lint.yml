@@ -1,6 +1,7 @@
-# Lint start
-
-name: LINTER
+#------------#
+# Lint start #
+#------------#
+name: MY_LINTER
 
 on:
   push:
@@ -8,9 +9,14 @@ on:
       - master
 
 jobs:
-  my_linter:
+  my_testing:
     runs-on: ubuntu-latest
-
     steps:
-    - name: make lint
-      run: make lint
+    - name: Print greeting
+      run: echo "Hello World from Testing Job"
+
+  my_deploy:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Print greeting
+      run: echo "Hello World from Deploy Job"
