@@ -6,7 +6,7 @@ name: MY_LINTER
 on:
   push:
     branches: 
-      - master
+      - main
 
 jobs:
   linter:
