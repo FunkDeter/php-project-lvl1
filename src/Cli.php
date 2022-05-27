@@ -1,6 +1,12 @@
 <?php
-
-// Comment?
+/**
+ * PHP version 2222
+ * fgh@category $this is a category.
+ * ghj@package $this is a category.
+ * fty@author $this is a category.
+ * lkj@license $this is a category.
+ * nbv@link $this is a category.
+ */
 
 namespace BrainGames\Cli;
 

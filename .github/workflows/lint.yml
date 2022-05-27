@@ -1,0 +1,16 @@
+#------------#
+# Lint start #
+#------------#
+name: MY_LINTER
+
+on:
+  push:
+    branches: 
+      - main
+
+jobs:
+  linter:
+    runs-on: ubuntu-latest
+    steps:
+    - name: start_lint
+      run: make lint
