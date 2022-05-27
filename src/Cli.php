@@ -1,4 +1,6 @@
-<?php /** Comment?
+<?php
+
+// Comment?
 
 namespace BrainGames\Cli;
 
