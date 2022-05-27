@@ -1,0 +1,16 @@
+#------------#
+# Lint start #
+#------------#
+name: MY_LINTER
+
+on:
+  push:
+    branches: 
+      - master
+
+jobs:
+  linter:
+    runs-on: ubuntu-latest
+    steps:
+    - name: start_lint
+      run: composer exec --verbose phpcs -- --standard=PSR12 src bin
