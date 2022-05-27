@@ -9,14 +9,8 @@ on:
       - master
 
 jobs:
-  my_testing:
+  linter:
     runs-on: ubuntu-latest
     steps:
-    - name: Print greeting
-      run: echo "Hello World from Testing Job"
-
-  my_deploy:
-    runs-on: ubuntu-latest
-    steps:
-    - name: Print greeting
-      run: echo "Hello World from Deploy Job"
+    - name: start_lint
+      run: composer exec --verbose phpcs -- --standard=PSR12 src bin
