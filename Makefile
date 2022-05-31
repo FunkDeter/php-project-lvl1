@@ -6,3 +6,5 @@ validate: # проверка composer.json
 	composer validate
 lint: # проверка синтаксиса
 	composer exec --verbose phpcs -- --standard=PSR12 src bin
+brain-even: # запуск игры
+	./bin/brain-even
