@@ -1,0 +1,63 @@
+#!/usr/bin/env php
+<?php
+namespace BrainCalc\Cli;
+/**
+ * PHP version 2222
+ * fgh@category $this is a category.
+ * ghj@package $this is a category.
+ * fty@author $this is a category.
+ * lkj@license $this is a category.
+ * nbv@link $this is a category.
+ */
+
+$autoloadPath1 = __DIR__ . '/../../../autoload.php';
+$autoloadPath2 = __DIR__ . '/../vendor/autoload.php';
+
+if (file_exists($autoloadPath1)) {
+    require_once $autoloadPath1;
+} else {
+    require_once $autoloadPath2;
+}
+
+use function cli\line;
+use function cli\prompt;
+use function cli\out;
+use function cli\err;
+
+line("Welcome to the Brain Game!");
+$name = prompt("May I have your name?");
+line("Hello, %s!", $name);
+line("Find the greatest common divisor of given numbers.");
+$count = 0;
+$correctAnswerCount = 3;
+
+function gcd($a, $b)
+{
+    if ($a == 0 || $b == 0)
+        return abs( max(abs($a), abs($b)) );
+       
+    $r = $a % $b;
+    return ($r != 0) ?
+        gcd($b, $r) :
+        abs($b);
+}
+
+while ($count < $correctAnswerCount) {
+    $int1 = rand(1, 100);
+    $int2 = rand(1, 100);
+    
+    line("Question: " . $int1 . " " . $int2);
+    $correctAnswer = intval(gcd("$int1", "$int2"));
+    $answer = intval(prompt("Your answer"));
+    if ($answer === $correctAnswer) {
+        out("Correct! \n");
+        $count++;
+    } else {
+        err($answer . " is wrong answer ;(. Correct answer was " . $correctAnswer . ".\n
+        Let\'s try again," . $name . "!");
+        $count = 0;
+    }
+}
+if ($count == 3) {
+    out("Congratulations, " . $name . "!");
+}

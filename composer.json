@@ -10,7 +10,10 @@
     ],
     "bin": [
       "bin/brain-games",
-      "bin/brain-even"
+      "bin/brain-even",
+      "bin/brain-calc",
+      "bin/brain-gcd",
+      "bin/brain-prime"
     ],
     "require-dev": {
         "wp-cli/php-cli-tools": "^0.11.13",

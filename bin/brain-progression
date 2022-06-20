@@ -1,0 +1,65 @@
+#!/usr/bin/env php
+<?php
+namespace BrainCalc\Cli;
+/**
+ * PHP version 2222
+ * fgh@category $this is a category.
+ * ghj@package $this is a category.
+ * fty@author $this is a category.
+ * lkj@license $this is a category.
+ * nbv@link $this is a category.
+ */
+
+$autoloadPath1 = __DIR__ . '/../../../autoload.php';
+$autoloadPath2 = __DIR__ . '/../vendor/autoload.php';
+
+if (file_exists($autoloadPath1)) {
+    require_once $autoloadPath1;
+} else {
+    require_once $autoloadPath2;
+}
+
+use function cli\line;
+use function cli\prompt;
+use function cli\out;
+use function cli\err;
+
+line("Welcome to the Brain Game!");
+$name = prompt("May I have your name?");
+line("Hello, %s!", $name);
+line("What number is missing in the progression?");
+$count = 0;
+$correctAnswerCount = 3;
+
+while ($count < $correctAnswerCount) {
+    $lenghtOfProgression = rand(5, 10);
+    $firstNumber = rand(1, 15);
+    $increaseNumber = rand(1, 10);
+
+    $arrayProgression = [];
+    $arrayProgression[0] = $firstNumber;
+    for($i = 1; $i < $lenghtOfProgression; $i++) {
+        $arrayProgression[$i] = $arrayProgression[$i -1] + $increaseNumber;
+    }
+    $randomPlaceOfHiddenNumber = rand(0, $lenghtOfProgression -1);
+    
+    $correctAnswer =  $arrayProgression[$randomPlaceOfHiddenNumber];
+    $hiddenNumber = $correctAnswer;
+    $hiddenNumber = '..';
+    $arrayProgression[$randomPlaceOfHiddenNumber] = $hiddenNumber;
+    $numbersStringForView = implode(' ', $arrayProgression);
+
+    line("Question: " . $numbersStringForView);
+    $answer = intval(prompt("Your answer"));
+    if ($answer === $correctAnswer) {
+        out("Correct! \n");
+        $count++;
+    } else {
+        err($answer . " is wrong answer ;(. Correct answer was " . $correctAnswer . ".\n
+        Let\'s try again," . $name . "!");
+        $count = 0;
+    }
+}
+if ($count == 3) {
+    out("Congratulations, " . $name . "!");
+}
