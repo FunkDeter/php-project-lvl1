@@ -1,22 +1,43 @@
 {
-    "name": "hexlet/code",
-    "description": "the best packege on the World",
-    "license": "proprietary",
+    "description": "php project #1. Hexlet",
+    "keywords": [
+        "game",
+        "hexlet",
+        "project"
+    ],
+    "type": "project",
     "authors": [
         {
-            "name": "FunkDeter",
+            "name": "Igor Kinko",
             "email": "igorkinko@gmail.com"
         }
     ],
+    "name": "funkdeter/php-project-lvl1",
+    "require": {
+        "wp-cli/php-cli-tools": "^0.11.11"
+    },
     "bin": [
-      "bin/brain-games",
-      "bin/brain-even",
-      "bin/brain-calc",
-      "bin/brain-gcd",
-      "bin/brain-prime"
-    ],
+        "bin/brain-games",
+        "bin/brain-even",
+        "bin/brain-calc",
+        "bin/brain-gcd",
+        "bin/brain-progression",
+        "bin/brain-prime"
+      ],
+    "autoload": {
+        "files": [
+            "src/GameStarter.php",
+            "src/games/CheckToEvenNumber.php",
+            "src/games/Calc.php",
+            "src/games/Gcd.php",
+            "src/games/Progression.php",
+            "src/games/Prime.php"
+        ]
+    },
     "require-dev": {
-        "wp-cli/php-cli-tools": "^0.11.13",
-        "squizlabs/php_codesniffer": "^3.6"
+        "squizlabs/php_codesniffer": "^3.5"
+    },
+    "scripts": {
+        "phpcs": "phpcs"
     }
 }
