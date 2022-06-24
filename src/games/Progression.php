@@ -36,6 +36,6 @@ function run()
 
         return [$question, $answer];
     };
-    
+
     startGame(PROMPT_TEXT, $getGameData);
 }

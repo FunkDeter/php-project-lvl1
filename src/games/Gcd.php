@@ -18,15 +18,15 @@ function calcGcd($value1, $value2)
 function run()
 {
     $getGameData = function () {
-        
+
         $value1 = rand(1, 100);
         $value2 = rand(1, 100);
-        
+
         $question = "{$value1} gcd {$value2}";
         $answer = calcGcd($value1, $value2);
 
         return [$question, $answer];
     };
-    
+
     startGame(PROMPT_TEXT, $getGameData);
 }

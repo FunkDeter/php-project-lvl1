@@ -14,12 +14,12 @@ function isEven($number)
 function run()
 {
     $getGameData = function () {
-        
+
         $question = rand(1, 99);
         $answer = (isEven($question) ? 'yes' : 'no');
-        
+
         return [$question, $answer];
     };
-    
+
     startGame(PROMPT_TEXT, $getGameData);
 }

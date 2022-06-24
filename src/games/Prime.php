@@ -22,9 +22,9 @@ function run()
 
         $question = rand(1, 100);
         $answer = (isPrime($question) ? 'yes' : 'no');
-        
+
         return [$question, $answer];
     };
-    
+
     startGame(PROMPT_TEXT, $getGameData);
 }
