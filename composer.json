@@ -5,6 +5,7 @@
         "hexlet",
         "project"
     ],
+    "license": "proprietary",
     "type": "project",
     "authors": [
         {
