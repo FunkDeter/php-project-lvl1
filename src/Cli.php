@@ -1,21 +1,28 @@
 <?php
 
 /**
- * PHP version 2222
- * fgh@category $this is a category.
- * ghj@package $this is a category.
- * fty@author $this is a category.
- * lkj@license $this is a category.
- * nbv@link $this is a category.
+ * Namespace for function welcomePrompt()
+ *
+ * @category None
+ * @package  None
+ * @author   FunkDetera <igorkinko@gmail.com>
+ * @license  http://www.php.net/license/3_01.txt  PHP License 3.01
+ * @link     None
  */
 
-namespace BrainGames\Cli;
+namespace Brain\Games\Cli;
 
 use function cli\line;
 use function cli\prompt;
 
-/*
-line('Welcome to the Brain Game!');
-$name = prompt('May I have your name?');
-line('Hello, %s!', $name);
-*/
+/**
+ * Function welcomePrompt()
+ *
+ * @return void
+ */
+function welcomePrompt(): void
+{
+    line('Welcome to the Brain Games!');
+    $name = prompt('May I have your name', '', '? ', false);
+    line("Hello, %s!", $name);
+}

@@ -1,39 +1,40 @@
 {
-    "description": "php project 1. Hexlet",
-    "keywords": [
-        "game",
-        "hexlet",
-        "project"
-    ],
-    "license": "proprietary",
-    "type": "project",
-    "authors": [
+  "name": "hexlet/code",
+  "bin": [
+    "bin/brain-games",
+    "bin/brain-even",
+    "bin/brain-calc",
+    "bin/brain-gcd",
+    "bin/brain-progression",
+    "bin/brain-prime"
+  ],
+  "type": "project",
+  "authors": [
         {
             "name": "FunkDeter",
             "email": "igorkinko@gmail.com"
         }
+  ],
+  "description": "none",
+  "license": "MIT",
+  "autoload": {
+    "files": [
+      "src/Cli.php",
+      "src/Games/Even.php",
+      "src/Games/Calc.php",
+      "src/Games/Gcd.php",
+      "src/Games/Progression.php",
+      "src/Games/Prime.php",
+      "src/Engine.php"
     ],
-    "name": "hexlet/code",
-    "require": {
-        "wp-cli/php-cli-tools": "^0.11.11"
-    },
-    "bin": [
-        "bin/brain-games",
-        "bin/brain-even",
-        "bin/brain-calc",
-        "bin/brain-gcd",
-        "bin/brain-progression",
-        "bin/brain-prime"
-      ],
-    "autoload": {
-        "files": [
-            "src/Cli.php"
-        ]
-    },
-    "require-dev": {
-        "squizlabs/php_codesniffer": "^3.5"
-    },
-    "scripts": {
-        "phpcs": "phpcs"
+    "psr-4": {
+      "Brain\\Games\\CliTools\\": "vendor/wp-cli/php-cli-tools"
     }
+  },
+  "require": {
+    "wp-cli/php-cli-tools": "^0.11.13"
+  },
+  "require-dev": {
+    "squizlabs/php_codesniffer": "^3.6"
+  }
 }

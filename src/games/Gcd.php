@@ -1,32 +1,90 @@
 <?php
 
-namespace BrainGames\games\Gcd;
+/**
+ * Namespace for Brain\Games\Gcd
+ *
+ * @category None
+ * @package  None
+ * @author   FunkDetera <igorkinko@gmail.com>
+ * @license  http://www.php.net/license/3_01.txt  PHP License 3.01
+ * @link     None
+ */
 
-use function BrainGames\games\run as startGame;
+namespace Brain\Games\Gcd;
 
-const PROMPT_TEXT = 'Find the greatest common divisor of given numbers.';
+use function cli\line;
+use function cli\prompt;
+use function cli\out;
+use function Brain\Games\Engine\welcomePrompt;
 
-function calcGcd($value1, $value2)
+/**
+ * Function runGame()
+ *
+ * @return void
+ */
+function runGame(): void
 {
-    if ($value2 == 0) {
-        return $value1;
-    }
+    line('');
+    $name = welcomePrompt();
+    line('Find the greatest common divisor of given numbers.');
 
-    return calcGcd($value2, $value1 % $value2);
+    $count = 0;
+    do {
+        $randomX = rand(1, 100);
+        $randomY = rand(1, 100);
+
+        $strQuestion = "{$randomX} {$randomY}";
+        $resQuestion = gcd($randomX, $randomY);
+
+        $isCorrectAnswer = question($strQuestion, $resQuestion);
+        if (!$isCorrectAnswer) {
+            line("Let's try again, %s!", $name);
+        }
+        $count++;
+    } while ($count < 3 && $isCorrectAnswer);
+
+    if ($isCorrectAnswer) {
+        line("Congratulations, %s!", $name);
+    }
 }
 
-function run()
+/**
+ * Function gcd($a, $b)
+ *
+ * @param int $a check number
+ * @param int $b check number
+ *
+ * @return int
+ */
+function gcd(int $a, int $b): int
 {
-    $getGameData = function () {
+    if ($a % $b !== 0) {
+        return gcd($b, $a % $b);
+    }
 
-        $value1 = rand(1, 100);
-        $value2 = rand(1, 100);
+    return $b;
+}
 
-        $question = "{$value1} gcd {$value2}";
-        $answer = calcGcd($value1, $value2);
+/**
+ * Function question($strQuestion, $resQuestion)
+ *
+ * @param string $strQuestion show string
+ * @param int    $resQuestion check number
+ *
+ * @return bool
+ */
+function question(string $strQuestion, int $resQuestion): bool
+{
+    line("Question: %s", $strQuestion);
+    $answer = prompt('Your answer');
 
-        return [$question, $answer];
-    };
+    if (intval($answer) === $resQuestion) {
+        line("Correct!");
+        return true;
+    }
 
-    startGame(PROMPT_TEXT, $getGameData);
+    out("'%s' is wrong answer ;(. ", $answer);
+    line("Correct answer was '%d'.", $resQuestion);
+
+    return false;
 }

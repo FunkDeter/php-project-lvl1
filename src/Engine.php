@@ -1,31 +1,30 @@
 <?php
 
-namespace BrainGames\games;
+/**
+ * Namespace for Brain\Games\Engine
+ *
+ * @category None
+ * @package  None
+ * @author   Sunchea <sunchea.qomo@gmail.com>
+ * @license  http://www.php.net/license/3_01.txt  PHP License 3.01
+ * @link     None
+ */
 
-const GAMES_COUNT = 3;
+namespace Brain\Games\Engine;
 
 use function cli\line;
 use function cli\prompt;
 
-function run($promptText, $getgameData)
+/**
+ * Function welcomePrompt()
+ *
+ * @return string
+ */
+function welcomePrompt(): string
 {
-
-    line('Welcome to Brain Games!');
-    line('%s', $promptText);
-    $name = prompt('May I have your name?');
+    line('Welcome to the Brain Games!');
+    $name = prompt('May I have your name', '', '? ', false);
     line("Hello, %s!", $name);
 
-    for ($step = 1; $step <= GAMES_COUNT; $step++) {
-        [$textQuestion, $correctAnswer] = $getgameData();
-        line("Question: %s", $textQuestion);
-        $answer = prompt('Your answer');
-        if ($answer == $correctAnswer) {
-            line("Correct!");
-        } else {
-            line("'%s' is wrong answer ;(. Correct answer was '%s'.", $answer, $correctAnswer);
-            line("Let's try again, %s!", $name);
-            exit;
-        }
-    }
-    line("Congratulations, %s!", $name);
+    return $name;
 }

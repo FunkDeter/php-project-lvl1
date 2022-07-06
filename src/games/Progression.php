@@ -1,41 +1,95 @@
 <?php
 
-namespace BrainGames\games\Progression;
+/**
+ * Namespace for Brain\Games\Progression
+ *
+ * @category None
+ * @package  None
+ * @author   Sunchea <sunchea.qomo@gmail.com>
+ * @license  http://www.php.net/license/3_01.txt  PHP License 3.01
+ * @link     None
+ */
 
-use function BrainGames\games\run as startGame;
+namespace Brain\Games\Progression;
 
-const LENGTH_PROGRESSION = 10;
-const MAX_STEP_PROGRESSION = 10;
-const MAX_START_PROGRESSION = 90;
+use function cli\line;
+use function cli\prompt;
+use function cli\out;
+use function Brain\Games\Engine\welcomePrompt;
 
-const PROMPT_TEXT = 'What number is missing in the progression?';
-
-function getProgresion($startProgression, $step, $length)
+/**
+ * Function runGame()
+ *
+ * @return void
+ */
+function runGame(): void
 {
-    $result = [];
-    for ($i = 0; $i < $length; $i++) {
-        $result[] = $startProgression + $i * $step;
+    line('');
+    $name = welcomePrompt();
+    line('What number is missing in the progression?');
+
+    $count = 0;
+    do {
+        $randomResult = [];
+        $resQuestion = 0;
+
+        $randomStart = rand(1, 9);
+        $randomStep = rand(2, 7);
+        $randomStop = rand(8, 10);
+        $randomPosition = rand(0, $randomStop - 1);
+
+        $randomSalt = rand(1, 3);
+
+        if ($randomPosition != 0) {
+            $randomResult[] = $randomStart + $randomSalt;
+        } elseif ($randomPosition == 0) {
+            $randomResult[] = '..';
+            $resQuestion = $randomStart + $randomSalt;
+        }
+
+        for ($i = 1; $i < $randomStop; $i += 1) {
+            if ($i != $randomPosition) {
+                $randomResult[] = $randomStart + $i * $randomStep + $randomSalt;
+            } elseif ($i == $randomPosition) {
+                $randomResult[] = '..';
+                $resQuestion = $randomStart + $i * $randomStep + $randomSalt;
+            }
+        }
+
+        $strQuestion = implode(" ", $randomResult);
+
+        $isCorrectAnswer = question($strQuestion, $resQuestion);
+        if (!$isCorrectAnswer) {
+            line("Let's try again, %s!", $name);
+        }
+        $count++;
+    } while ($count < 3 && $isCorrectAnswer);
+
+    if ($isCorrectAnswer) {
+        line("Congratulations, %s!", $name);
     }
-    return $result;
 }
 
-function run()
+/**
+ * Function question($strQuestion, $resQuestion)
+ *
+ * @param string $strQuestion show string
+ * @param int    $resQuestion check number
+ *
+ * @return bool
+ */
+function question(string $strQuestion, int $resQuestion): bool
 {
-    $getGameData = function () {
+    line("Question: %s", $strQuestion);
+    $answer = prompt('Your answer');
 
-        $startProgression = rand(1, MAX_START_PROGRESSION);
-        $stepProgression = rand(1, MAX_STEP_PROGRESSION);
-        $secretElementPosition = rand(0, LENGTH_PROGRESSION - 1);
+    if (intval($answer) === $resQuestion) {
+        line("Correct!");
+        return true;
+    }
 
-        $progression = getProgresion($startProgression, $stepProgression, LENGTH_PROGRESSION);
+    out("'%s' is wrong answer ;(. ", $answer);
+    line("Correct answer was '%d'.", $resQuestion);
 
-        $answer = $progression[$secretElementPosition];
-
-        $progression[$secretElementPosition] = "**";
-        $question = implode(",", $progression);
-
-        return [$question, $answer];
-    };
-
-    startGame(PROMPT_TEXT, $getGameData);
+    return false;
 }
