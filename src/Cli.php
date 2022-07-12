@@ -5,7 +5,7 @@
  *
  * @category None
  * @package  None
- * @author   FunkDetera <igorkinko@gmail.com>
+ * @author   FunkDeter <igorkinko@gmail.com>
  * @license  http://www.php.net/license/3_01.txt  PHP License 3.01
  * @link     None
  */
@@ -20,7 +20,7 @@ use function cli\prompt;
  *
  * @return void
  */
-function welcomePrompt(): void
+function welcomePrompt()
 {
     line('Welcome to the Brain Games!');
     $name = prompt('May I have your name', '', '? ', false);
